@@ -1,0 +1,12 @@
+{#- DRAFT (5 Nov 2026), waiting for reviewer approval. Sent to "Send alerts to" in Dezino360 Settings. -#}
+<p>The AI receptionist for {{ business_name }} has used <strong>{{ level }}%</strong> of this month's plan minutes.</p>
+<table cellpadding="4" style="border-collapse: collapse;">
+	<tr><td><strong>Month</strong></td><td>{{ month }}</td></tr>
+	<tr><td><strong>Minutes used</strong></td><td>{{ used }} of {{ plan }}</td></tr>
+</table>
+{% if level >= 100 %}
+<p>Calls are still answered. Each minute over the plan is charged at US${{ "%.2f"|format(rate) }}.</p>
+{% else %}
+<p>Calls are still answered. Minutes over the plan are charged at US${{ "%.2f"|format(rate) }} each.</p>
+{% endif %}
+<p>Workspace: {{ site }}</p>

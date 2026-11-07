@@ -1,0 +1,231 @@
+/* Dezino360 brand for website pages: login, workspace switcher, error pages. */
+@font-face {
+	font-family: "Raleway";
+	src: url("/assets/dezino360/fonts/raleway-latin-wght-normal.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Sacramento";
+	src: url("/assets/dezino360/fonts/sacramento-latin-400-normal.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* html:root, not :root: Frappe's login stylesheet loads after this file and sets the
+   same variables on :root, so these need to be one step more specific to win. */
+html:root {
+	--d360-plum: #7a004b;
+	--d360-orange: #ffa51f;
+	--d360-deep: #3d0026;
+	--d360-cream: #ffe7c2;
+	--font-stack: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	--primary: var(--d360-plum);
+	--primary-color: var(--d360-plum);
+	--btn-primary: var(--d360-plum);
+	--focus-default: 0 0 0 2px var(--d360-plum);
+}
+
+body,
+input,
+button,
+select,
+textarea {
+	font-family: var(--font-stack);
+}
+
+a,
+.text-primary,
+.page-card a:not(.btn) {
+	color: var(--d360-plum);
+}
+/* Frappe greys out "Forgot Password?" with a long selector; this one is one step stronger. */
+.page-card .page-card-body .forgot-password-message > a:not(.btn) {
+	color: var(--d360-plum);
+}
+a:not(.btn):hover,
+.page-card .page-card-body .forgot-password-message > a:not(.btn):hover {
+	color: var(--d360-deep);
+}
+
+.btn.btn-primary,
+.btn.btn-primary:focus {
+	background-color: var(--d360-plum);
+	border-color: var(--d360-plum);
+	color: #fff;
+}
+.btn.btn-primary:hover,
+.btn.btn-primary:not(:disabled):not(.disabled):active {
+	background-color: var(--d360-deep) !important;
+	border-color: var(--d360-deep);
+	color: #fff !important;
+}
+/* Keyboard focus: plum ring (orange on white is too faint to see; plum is over 10:1). */
+:focus-visible,
+.btn:focus-visible {
+	outline: 2px solid var(--d360-plum);
+	outline-offset: 2px;
+}
+.form-control:focus {
+	border-color: var(--d360-plum);
+	box-shadow: var(--focus-default);
+}
+
+/* "Login with Dezino360" on a workspace login page: text only, same size as Login.
+   (!important: Frappe pads this wrapper by 4px with a six-class selector.) */
+.social-login-buttons .login-button-wrapper {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+.btn-login-option {
+	align-items: center;
+	justify-content: center;
+}
+.btn-login-option img {
+	height: 16px;
+	width: auto;
+}
+
+/* Logo: the brand mark sits on a white chip, as on dezino360.com, so it stays
+   readable on dark backgrounds (there is no separate dark-background logo yet). */
+.d360-brand-logo,
+.page-card-head .app-logo,
+.for-login .app-logo {
+	background: #fff;
+	border-radius: 8px;
+	padding: 4px 8px;
+	height: auto;
+	max-height: 56px;
+	width: auto;
+}
+.navbar .d360-brand-logo {
+	max-height: 36px;
+}
+
+/* Login pages: Frappe's top bar has no menu items there, so at phone width its menu
+   button opened an empty menu. Hide the button and the empty menu. */
+body[data-path="login"] .navbar .navbar-toggler,
+body[data-path="login"] .navbar .navbar-collapse {
+	display: none !important;
+}
+
+.web-footer .footer-powered,
+.d360-credit {
+	font-size: inherit;
+}
+.d360-credit a {
+	color: inherit;
+}
+
+/* Workspace switcher */
+.d360-switcher {
+	max-width: 560px;
+	margin: 48px auto;
+}
+.d360-switcher h1 {
+	font-weight: 800;
+	color: var(--d360-deep);
+	margin-bottom: 24px;
+}
+.d360-workspace-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	gap: 12px;
+}
+.d360-workspace {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	padding: 16px 20px;
+	border: 2px solid var(--d360-plum);
+	border-radius: 10px;
+	text-decoration: none;
+	color: var(--d360-deep);
+}
+.d360-workspace:hover {
+	background: var(--d360-cream);
+	text-decoration: none;
+}
+.d360-workspace-name {
+	font-weight: 700;
+}
+.d360-workspace-site {
+	font-size: 0.85em;
+	color: var(--d360-plum);
+}
+
+[data-theme="dark"] .d360-switcher h1,
+[data-theme="dark"] .d360-workspace {
+	color: var(--d360-cream);
+}
+[data-theme="dark"] .d360-workspace:hover {
+	background: var(--d360-deep);
+}
+[data-theme="dark"] .d360-workspace-site {
+	color: var(--d360-orange);
+}
+
+/* Booking page (/book) */
+.d360-book {
+	max-width: 640px;
+	margin: 2rem auto;
+	padding: 0 16px;
+}
+.d360-book-meta {
+	color: #6b6b6b;
+}
+.d360-days,
+.d360-times {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 1.25rem;
+}
+.d360-book-form label {
+	display: block;
+	margin-bottom: 12px;
+}
+.d360-book-form input,
+.d360-book-form textarea {
+	display: block;
+	width: 100%;
+	margin-top: 4px;
+	padding: 8px 10px;
+	border: 1px solid #d1d1d1;
+	border-radius: 6px;
+}
+.d360-privacy {
+	font-size: 0.9em;
+	color: #6b6b6b;
+}
+.d360-error {
+	color: #b00020;
+	margin-top: 10px;
+}
+
+/* /book: no top bar (no "Login" link or menu button); the workspace's own logo and name instead. */
+body[data-path="book"] .navbar {
+	display: none !important;
+}
+.d360-book-brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 1.5rem;
+}
+.d360-book-logo {
+	max-height: 48px;
+	width: auto;
+}
+.d360-book-business {
+	font-weight: 700;
+	font-size: 1.1em;
+}
+.d360-ts {
+	margin: 12px 0;
+}

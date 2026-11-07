@@ -1,0 +1,170 @@
+{
+ "actions": [],
+ "autoname": "format:BOOK-{#####}",
+ "creation": "2026-11-01 08:00:00.000000",
+ "description": "A call booked on this workspace's booking page. Times are stored in UTC.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "start_utc",
+  "end_utc",
+  "status",
+  "lead",
+  "column_break_1",
+  "full_name",
+  "email",
+  "phone",
+  "visitor_time_zone",
+  "section_cal",
+  "calendar_provider",
+  "calendar_event_id",
+  "meeting_link",
+  "notes",
+  "reminder_section",
+  "reminder_24h",
+  "reminder_1h"
+ ],
+ "fields": [
+  {
+   "fieldname": "start_utc",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Starts (UTC)",
+   "read_only": 1,
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "end_utc",
+   "fieldtype": "Datetime",
+   "label": "Ends (UTC)",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Booked",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Booked\nCancelled"
+  },
+  {
+   "fieldname": "lead",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Lead",
+   "options": "CRM Lead",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email",
+   "read_only": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "Phone",
+   "read_only": 1
+  },
+  {
+   "fieldname": "visitor_time_zone",
+   "fieldtype": "Data",
+   "label": "Visitor's time zone",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_cal",
+   "fieldtype": "Section Break",
+   "label": "Calendar"
+  },
+  {
+   "fieldname": "calendar_provider",
+   "fieldtype": "Data",
+   "label": "Calendar",
+   "read_only": 1
+  },
+  {
+   "fieldname": "calendar_event_id",
+   "fieldtype": "Data",
+   "label": "Calendar event ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "meeting_link",
+   "fieldtype": "Data",
+   "label": "Meeting link",
+   "options": "URL",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes from the visitor",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reminder_section",
+   "fieldtype": "Section Break",
+   "label": "Reminders"
+  },
+  {
+   "fieldname": "reminder_24h",
+   "fieldtype": "Select",
+   "label": "24-hour reminder",
+   "options": "\nSent\nSkipped",
+   "read_only": 1,
+   "description": "Skipped when the call was booked less than 24 hours ahead."
+  },
+  {
+   "fieldname": "reminder_1h",
+   "fieldtype": "Select",
+   "label": "1-hour reminder",
+   "options": "\nSent\nSkipped",
+   "read_only": 1,
+   "description": "Skipped when the call was booked less than 1 hour ahead."
+  }
+ ],
+ "links": [],
+ "modified": "2026-11-01 08:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Dezino360",
+ "name": "Dezino360 Booking",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 0,
+   "delete": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "write": 1,
+   "export": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager"
+  }
+ ],
+ "sort_field": "start_utc",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "full_name",
+ "track_changes": 1
+}

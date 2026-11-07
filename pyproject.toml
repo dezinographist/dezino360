@@ -1,0 +1,23 @@
+[project]
+name = "dezino360"
+authors = [
+    { name = "Dezino Graphist", email = "grow@dezino360.com" }
+]
+description = "Dezino360 Hub: the front door, client workspaces and branding on Frappe CRM"
+requires-python = ">=3.10"
+readme = "README.md"
+license = { file = "LICENSE" }
+dynamic = ["version"]
+dependencies = [
+    # frappe and crm are installed and managed by bench.
+    # Stripe's official library (phase 8): webhook signatures and API calls. 16.1.0: its changelog replaces a CA bundle
+    # that included a root whose intermediates were compromised, and rejects blank signing secrets.
+    "stripe==16.1.0",
+]
+
+[build-system]
+requires = ["flit_core==3.9.0"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench.frappe-dependencies]
+frappe = ">=15.125.0,<16.0.0"

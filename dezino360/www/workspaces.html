@@ -1,0 +1,23 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ _("Workspaces") }} | Dezino360{% endblock %}
+
+{% block page_content %}
+<section class="d360-switcher">
+	<h1>{{ _("Choose a workspace") }}</h1>
+	{% if workspaces %}
+	<ul class="d360-workspace-list">
+		{% for w in workspaces %}
+		<li>
+			<a class="d360-workspace" href="{{ w.url }}">
+				<span class="d360-workspace-name">{{ w.client_name }}</span>
+				<span class="d360-workspace-site">{{ w.site }}</span>
+			</a>
+		</li>
+		{% endfor %}
+	</ul>
+	{% else %}
+	<p class="d360-empty">{{ _("No workspace is set up for your account yet.") }}</p>
+	{% endif %}
+</section>
+{% endblock %}

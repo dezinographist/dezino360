@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Secrets never belong here: they live in each site's site_config.json
+.env
+.env.*
+*.key
+*.pem
+
+# Editors and OS clutter
+.DS_Store
+.idea/
+.vscode/
+.claude/

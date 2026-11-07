@@ -1,0 +1,434 @@
+{
+ "actions": [],
+ "creation": "2026-11-01 04:00:00.000000",
+ "description": "Lead emails for this workspace. Both are off until the owner approves them in writing.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "alert_section",
+  "new_lead_alert",
+  "alert_to",
+  "follow_up_section",
+  "follow_ups",
+  "business_name",
+  "website",
+  "sender_name",
+  "column_break_fu",
+  "booking_url",
+  "postal_address",
+  "fu1_section",
+  "fu1_subject",
+  "fu1_body",
+  "fu1_button",
+  "fu2_section",
+  "fu2_subject",
+  "fu2_body",
+  "fu2_button",
+  "fu3_section",
+  "fu3_subject",
+  "fu3_body",
+  "fu3_button",
+  "booking_section",
+  "booking_enabled",
+  "booking_title",
+  "booking_intro",
+  "privacy_url",
+  "booking_logo",
+  "turnstile_site_key",
+  "calendar_provider",
+  "google_calendar_id",
+  "column_break_bk",
+  "booking_time_zone",
+  "booking_days",
+  "booking_start",
+  "booking_end",
+  "meeting_minutes",
+  "gap_minutes",
+  "notice_hours",
+  "days_ahead",
+  "voice_section",
+  "voice_enabled",
+  "voice_plan_minutes",
+  "voice_overage_rate",
+  "voice_agent_name",
+  "voice_language",
+  "voice_emergency_number",
+  "column_break_vc",
+  "voice_month",
+  "voice_minutes_used",
+  "voice_alert_80",
+  "voice_alert_100",
+  "voice_facts_section",
+  "voice_facts",
+  "billing_section",
+  "billing_enabled"
+ ],
+ "fields": [
+  {
+   "fieldname": "alert_section",
+   "fieldtype": "Section Break",
+   "label": "New-lead alert"
+  },
+  {
+   "default": "0",
+   "description": "Email an alert for every new lead. Off until the owner approves it.",
+   "fieldname": "new_lead_alert",
+   "fieldtype": "Check",
+   "label": "Send new-lead alerts"
+  },
+  {
+   "fieldname": "alert_to",
+   "fieldtype": "Data",
+   "label": "Send alerts to",
+   "options": "Email"
+  },
+  {
+   "description": "Emails the lead on day 4, 8 and 12, only if they gave consent to contact and their status is New or Contacted. They stop as soon as the status changes (for example to Meeting Booked) or the lead unsubscribes. Every email has a one-click unsubscribe link and the postal address below.",
+   "fieldname": "follow_up_section",
+   "fieldtype": "Section Break",
+   "label": "Follow-up emails"
+  },
+  {
+   "default": "0",
+   "description": "Off until cutover. Can't be switched on while any field in this section is empty.",
+   "fieldname": "follow_ups",
+   "fieldtype": "Check",
+   "label": "Send follow-ups on day 4, 8 and 12"
+  },
+  {
+   "description": "Shown as the sender and in the email footer.",
+   "fieldname": "business_name",
+   "fieldtype": "Data",
+   "label": "Business name"
+  },
+  {
+   "description": "Where the lead sent their inquiry, e.g. example.com.",
+   "fieldname": "website",
+   "fieldtype": "Data",
+   "label": "Website"
+  },
+  {
+   "description": "The line under \"Kind regards,\", e.g. The Example team.",
+   "fieldname": "sender_name",
+   "fieldtype": "Data",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "column_break_fu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "booking_url",
+   "fieldtype": "Data",
+   "label": "Booking link",
+   "options": "URL"
+  },
+  {
+   "description": "Required by law in every marketing email. Follow-ups refuse to switch on while it is empty.",
+   "fieldname": "postal_address",
+   "fieldtype": "Small Text",
+   "label": "Postal address"
+  },
+  {
+   "fieldname": "fu1_section",
+   "fieldtype": "Section Break",
+   "label": "Follow-up 1 (day 4)",
+   "collapsible": 1,
+   "description": "Starts with \"Hi <first name>,\" and ends with the button, the signature, the postal address and the unsubscribe link, all added automatically."
+  },
+  {
+   "fieldname": "fu1_subject",
+   "fieldtype": "Data",
+   "label": "Subject"
+  },
+  {
+   "fieldname": "fu1_body",
+   "fieldtype": "Text Editor",
+   "label": "Body"
+  },
+  {
+   "fieldname": "fu1_button",
+   "fieldtype": "Data",
+   "label": "Button text",
+   "description": "The one call to action. It opens the booking link."
+  },
+  {
+   "fieldname": "fu2_section",
+   "fieldtype": "Section Break",
+   "label": "Follow-up 2 (day 8)",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "fu2_subject",
+   "fieldtype": "Data",
+   "label": "Subject"
+  },
+  {
+   "fieldname": "fu2_body",
+   "fieldtype": "Text Editor",
+   "label": "Body"
+  },
+  {
+   "fieldname": "fu2_button",
+   "fieldtype": "Data",
+   "label": "Button text",
+   "description": "The one call to action. It opens the booking link."
+  },
+  {
+   "fieldname": "fu3_section",
+   "fieldtype": "Section Break",
+   "label": "Follow-up 3 (day 12)",
+   "collapsible": 1
+  },
+  {
+   "fieldname": "fu3_subject",
+   "fieldtype": "Data",
+   "label": "Subject"
+  },
+  {
+   "fieldname": "fu3_body",
+   "fieldtype": "Text Editor",
+   "label": "Body"
+  },
+  {
+   "fieldname": "fu3_button",
+   "fieldtype": "Data",
+   "label": "Button text",
+   "description": "The one call to action. It opens the booking link."
+  },
+  {
+   "fieldname": "booking_section",
+   "fieldtype": "Section Break",
+   "label": "Booking page",
+   "collapsible": 1,
+   "description": "The page at /book on this workspace. Visitors see free times in their own time zone; everything is stored in UTC. Booking a call creates or updates the lead with status Meeting Booked, which stops follow-ups."
+  },
+  {
+   "fieldname": "booking_enabled",
+   "fieldtype": "Check",
+   "label": "Booking page on",
+   "default": "0",
+   "description": "Can't be switched on until the title, calendar and times below are set."
+  },
+  {
+   "fieldname": "booking_title",
+   "fieldtype": "Data",
+   "label": "Call name",
+   "description": "e.g. 15-min Discovery Call"
+  },
+  {
+   "fieldname": "booking_intro",
+   "fieldtype": "Small Text",
+   "label": "Short description"
+  },
+  {
+   "fieldname": "calendar_provider",
+   "fieldtype": "Select",
+   "label": "Calendar",
+   "options": "Test calendar (stand-in)\nGoogle Calendar",
+   "default": "Test calendar (stand-in)",
+   "description": "The stand-in keeps bookings in the Hub only (no Google, no Meet link). Google Calendar needs the Google set-up (phase 5)."
+  },
+  {
+   "fieldname": "google_calendar_id",
+   "fieldtype": "Data",
+   "label": "Google calendar ID",
+   "depends_on": "eval:doc.calendar_provider=='Google Calendar'"
+  },
+  {
+   "fieldname": "column_break_bk",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "booking_time_zone",
+   "fieldtype": "Data",
+   "label": "Hours are in time zone",
+   "default": "Australia/Adelaide"
+  },
+  {
+   "fieldname": "booking_days",
+   "fieldtype": "Data",
+   "label": "Days",
+   "default": "Mon,Tue,Wed,Thu,Fri",
+   "description": "Comma-separated: Mon,Tue,Wed,Thu,Fri,Sat,Sun"
+  },
+  {
+   "fieldname": "booking_start",
+   "fieldtype": "Time",
+   "label": "First start time",
+   "default": "06:00:00"
+  },
+  {
+   "fieldname": "booking_end",
+   "fieldtype": "Time",
+   "label": "Calls end by",
+   "default": "10:00:00"
+  },
+  {
+   "fieldname": "meeting_minutes",
+   "fieldtype": "Int",
+   "label": "Call length (minutes)",
+   "default": "15"
+  },
+  {
+   "fieldname": "gap_minutes",
+   "fieldtype": "Int",
+   "label": "Gap between calls (minutes)",
+   "default": "0"
+  },
+  {
+   "fieldname": "notice_hours",
+   "fieldtype": "Int",
+   "label": "Minimum notice (hours)",
+   "default": "4"
+  },
+  {
+   "fieldname": "days_ahead",
+   "fieldtype": "Int",
+   "label": "Bookable up to (days ahead)",
+   "default": "30"
+  },
+  {
+   "fieldname": "privacy_url",
+   "fieldtype": "Data",
+   "options": "URL",
+   "label": "Privacy policy link",
+   "description": "Shown on the booking page."
+  },
+  {
+   "fieldname": "booking_logo",
+   "fieldtype": "Attach Image",
+   "label": "Logo at the top of the booking page",
+   "description": "Shown with the business name. Leave empty to show the name only."
+  },
+  {
+   "fieldname": "turnstile_site_key",
+   "fieldtype": "Data",
+   "label": "Turnstile site key (bot check)",
+   "description": "The public key of this workspace's Cloudflare Turnstile widget. Its secret goes into the site's settings file through the secrets script (hub-site-secret), never here."
+  },
+  {
+   "fieldname": "voice_section",
+   "fieldtype": "Section Break",
+   "label": "AI receptionist (phone)",
+   "collapsible": 1,
+   "description": "Answers this workspace's phone calls (inbound only): AI and recording notice first, books calls with the booking rules above, and saves the lead with the call summary. Plan minutes are counted per month in the booking time zone; alerts go to \"Send alerts to\" at 80% and 100%."
+  },
+  {
+   "fieldname": "voice_enabled",
+   "fieldtype": "Check",
+   "label": "Receptionist on",
+   "default": "0",
+   "description": "Can't be switched on until the business name, call name, time zone and days are set, and the receptionist is linked on the server (hub-voice-link)."
+  },
+  {
+   "fieldname": "voice_plan_minutes",
+   "fieldtype": "Int",
+   "label": "Plan minutes per month",
+   "default": "150"
+  },
+  {
+   "fieldname": "voice_overage_rate",
+   "fieldtype": "Float",
+   "label": "Price per minute over the plan (USD)",
+   "default": "0.35",
+   "precision": "2"
+  },
+  {
+   "fieldname": "column_break_vc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "voice_month",
+   "fieldtype": "Data",
+   "label": "Month counted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "voice_minutes_used",
+   "fieldtype": "Float",
+   "label": "Minutes used this month",
+   "read_only": 1,
+   "precision": "1"
+  },
+  {
+   "fieldname": "voice_alert_80",
+   "fieldtype": "Check",
+   "label": "80% alert sent this month",
+   "read_only": 1
+  },
+  {
+   "fieldname": "voice_alert_100",
+   "fieldtype": "Check",
+   "label": "100% alert sent this month",
+   "read_only": 1
+  },
+  {
+   "fieldname": "voice_agent_name",
+   "fieldtype": "Data",
+   "label": "Agent name",
+   "default": "Daisy",
+   "description": "The receptionist's name. It says \"I'm {name}, an AI assistant\" at the start of every call, and gives it if asked (still saying it's an AI). Default Daisy; change it any time."
+  },
+  {
+   "fieldname": "voice_language",
+   "fieldtype": "Select",
+   "label": "Language and spelling",
+   "default": "English (US)",
+   "options": "English (US)\nEnglish (Australia)\nEnglish (UK)\nEnglish (India)",
+   "description": "How the receptionist words things and spells them in summaries."
+  },
+  {
+   "fieldname": "voice_emergency_number",
+   "fieldtype": "Data",
+   "label": "Emergency number",
+   "default": "911",
+   "description": "In an emergency the receptionist tells the caller to hang up and call this number (911 in the US, 000 in Australia, 112 in India), then ends the call."
+  },
+  {
+   "fieldname": "voice_facts_section",
+   "fieldtype": "Section Break",
+   "label": "Receptionist facts",
+   "collapsible": 1,
+   "description": "The only things the receptionist may say about this business: approved services, plans, prices, hours and location. It never says anything beyond these."
+  },
+  {
+   "fieldname": "voice_facts",
+   "fieldtype": "Long Text",
+   "label": "Facts"
+  },
+  {
+   "fieldname": "billing_section",
+   "fieldtype": "Section Break",
+   "label": "Billing (Stripe)",
+   "collapsible": 1,
+   "description": "Phase 8: Stripe sandbox, TEST ONLY. Stripe's signed events keep each customer's Dezino360 Subscription in step (Active, Overdue, Paused at day 14, Cancelled at day 30). The test key and the webhook's signing secret live in this workspace's settings file (hub-stripe-secret), never here. Agency workspace only."
+  },
+  {
+   "fieldname": "billing_enabled",
+   "fieldtype": "Check",
+   "label": "Billing on",
+   "default": "0",
+   "description": "Off: Stripe's events are acknowledged and logged, but nothing is changed. Works with a Stripe test key only."
+  }
+ ],
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-11-06 13:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Dezino360",
+ "name": "Dezino360 Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

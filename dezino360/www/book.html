@@ -1,0 +1,115 @@
+{% extends "templates/web.html" %}
+
+{#- Booking page (phase 5). Wording is DRAFT for the reviewer. Times are shown in the visitor's own
+    time zone and sent to the Hub in UTC. -#}
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_content %}
+<section class="d360-book">
+	{#- The workspace's own logo and name: Dezino360 on app, each client's own on theirs. -#}
+	<header class="d360-book-brand">
+		{% if logo %}<img src="{{ logo }}" alt="" class="d360-book-logo">{% endif %}
+		{% if business_name %}<span class="d360-book-business">{{ business_name }}</span>{% endif %}
+	</header>
+	<h1>{{ call_title }}</h1>
+	{% if not open %}
+	<p class="d360-empty">{{ _("Booking isn't open here yet.") }}</p>
+	{% else %}
+	{% if intro %}<p class="d360-book-intro">{{ intro }}</p>{% endif %}
+	<p class="d360-book-meta">{{ minutes }} {{ _("minutes") }} · {{ _("Times are shown in your time zone:") }} <strong id="d360-tz"></strong></p>
+
+	<div id="d360-step-time">
+		<h2>{{ _("Pick a day") }}</h2>
+		<div id="d360-days" class="d360-days" role="list"></div>
+		<h2 id="d360-times-head" hidden>{{ _("Pick a time") }}</h2>
+		<div id="d360-times" class="d360-times" role="list"></div>
+		<p id="d360-none" class="d360-empty" hidden>{{ _("There are no free times right now. Please check back soon.") }}</p>
+	</div>
+
+	<form id="d360-step-details" class="d360-book-form" hidden novalidate>
+		<h2>{{ _("Your details") }}</h2>
+		<p class="d360-chosen"><span id="d360-chosen"></span> · <a href="#" id="d360-change">{{ _("Change time") }}</a></p>
+		<label>{{ _("Name") }}<input name="full_name" autocomplete="name" required maxlength="140"></label>
+		<label>{{ _("Email") }}<input name="email" type="email" autocomplete="email" required maxlength="140"></label>
+		<label>{{ _("Phone (optional)") }}<input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>
+		<label>{{ _("Anything we should know? (optional)") }}<textarea name="notes" rows="3" maxlength="1000"></textarea></label>
+		<p class="d360-privacy">{{ _("We use your details only to hold this call and get in touch about it.") }}
+			{% if privacy_url %}<a href="{{ privacy_url }}" target="_blank" rel="noopener">{{ _("Privacy policy") }}</a>{% endif %}</p>
+		<div id="d360-ts" class="d360-ts"></div>
+		<button type="submit" class="btn btn-primary">{{ _("Book the call") }}</button>
+		<p id="d360-error" class="d360-error" role="alert"></p>
+	</form>
+
+	<div id="d360-done" class="d360-done" hidden role="status">
+		<h2>{{ _("You're booked") }}</h2>
+		<p id="d360-done-when"></p>
+		<p>{{ _("A confirmation is on its way to your inbox.") }}</p>
+	</div>
+	{% endif %}
+</section>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+{% if open %}
+<script>
+(function () {
+	var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+	var $ = function (id) { return document.getElementById(id); };
+	var chosen = null, byDay = {}, tsId = null;
+	var siteKey = {{ (turnstile_site_key or "") | tojson }};
+	// Cloudflare Turnstile (bot check), rendered as the site's own forms do: explicit render, checked on the server.
+	if (siteKey) {
+		var s = document.createElement("script");
+		s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"; s.async = true;
+		s.onload = function () { tsId = window.turnstile.render("#d360-ts", { sitekey: siteKey, theme: "light", size: "flexible" }); };
+		document.head.appendChild(s);
+	}
+	var tsToken = function () { try { return (window.turnstile && tsId !== null && window.turnstile.getResponse(tsId)) || ""; } catch (e) { return ""; } };
+	var tsReset = function () { try { if (window.turnstile && tsId !== null) window.turnstile.reset(tsId); } catch (e) {} };
+	$("d360-tz").textContent = tz;
+	var dayKey = function (d) { return d.toLocaleDateString("en-CA", { timeZone: tz }); };
+	var dayLabel = function (d) { return d.toLocaleDateString(undefined, { timeZone: tz, weekday: "short", day: "numeric", month: "short" }); };
+	var timeLabel = function (d) { return d.toLocaleTimeString(undefined, { timeZone: tz, hour: "numeric", minute: "2-digit" }); };
+	function button(text, onClick) {
+		var b = document.createElement("button"); b.type = "button"; b.className = "btn btn-default"; b.textContent = text;
+		b.setAttribute("role", "listitem"); b.addEventListener("click", onClick); return b;
+	}
+	function showTimes(key) {
+		var box = $("d360-times"); box.innerHTML = ""; $("d360-times-head").hidden = false;
+		byDay[key].forEach(function (d) {
+			box.appendChild(button(timeLabel(d), function () {
+				chosen = d; $("d360-chosen").textContent = dayLabel(d) + ", " + timeLabel(d);
+				$("d360-step-time").hidden = true; $("d360-step-details").hidden = false;
+			}));
+		});
+	}
+	fetch("/api/method/dezino360.booking.slots").then(function (r) { return r.json(); }).then(function (d) {
+		(d.message.slots || []).forEach(function (s) { var t = new Date(s); (byDay[dayKey(t)] = byDay[dayKey(t)] || []).push(t); });
+		var keys = Object.keys(byDay).sort();
+		if (!keys.length) { $("d360-none").hidden = false; return; }
+		keys.forEach(function (k) { $("d360-days").appendChild(button(dayLabel(byDay[k][0]), function () { showTimes(k); })); });
+	});
+	$("d360-change").addEventListener("click", function (e) { e.preventDefault(); $("d360-step-details").hidden = true; $("d360-step-time").hidden = false; });
+	$("d360-step-details").addEventListener("submit", function (e) {
+		e.preventDefault();
+		var f = new FormData(e.target), err = $("d360-error"); err.textContent = "";
+		if (!f.get("full_name") || !f.get("email")) { err.textContent = "Please add your name and email."; return; }
+		if (siteKey && !tsToken()) { err.textContent = "Please complete the quick check above the button."; return; }
+		var body = new URLSearchParams({ start: chosen.toISOString(), full_name: f.get("full_name"), email: f.get("email"),
+			phone: f.get("phone") || "", notes: f.get("notes") || "", time_zone: tz, turnstile: tsToken() });
+		fetch("/api/method/dezino360.booking.book", { method: "POST", body: body,
+			headers: { "X-Frappe-CSRF-Token": (window.frappe && frappe.csrf_token) || "" } })
+			.then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+			.then(function (res) {
+				if (!res.ok) {
+					var m = res.j._server_messages ? JSON.parse(JSON.parse(res.j._server_messages)[0]).message : "That didn't go through. Please try again.";
+					err.textContent = m; tsReset(); return;
+				}
+				$("d360-step-details").hidden = true; $("d360-done").hidden = false; $("d360-done-when").textContent = res.j.message.when;
+			});
+	});
+})();
+</script>
+{% endif %}
+{% endblock %}

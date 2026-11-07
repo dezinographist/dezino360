@@ -1,0 +1,14 @@
+{#- DRAFT (1 Nov 2026), waiting for reviewer approval. Off by default (Dezino360 Settings). -#}
+<p>A new lead just arrived in {{ site }}.</p>
+<table cellpadding="4" style="border-collapse: collapse;">
+	<tr><td><strong>Name</strong></td><td>{{ lead.lead_name or "-" }}</td></tr>
+	<tr><td><strong>Email</strong></td><td>{{ lead.email or "-" }}</td></tr>
+	<tr><td><strong>Phone</strong></td><td>{{ lead.mobile_no or "-" }}</td></tr>
+	<tr><td><strong>Source</strong></td><td>{{ lead.source or "-" }}</td></tr>
+	<tr><td><strong>Plan of interest</strong></td><td>{{ lead.plan_of_interest or "-" }}</td></tr>
+	<tr><td><strong>Market</strong></td><td>{{ lead.market or "-" }}</td></tr>
+	<tr><td><strong>Consent to contact</strong></td><td>{{ "Yes" if lead.consent_to_contact else "No" }}</td></tr>
+	<tr><td><strong>First-touch page</strong></td><td>{{ lead.first_touch_page or "-" }}</td></tr>
+	<tr><td><strong>UTM</strong></td><td>{{ lead.utm_source or "-" }} / {{ lead.utm_medium or "-" }} / {{ lead.utm_campaign or "-" }}</td></tr>
+</table>
+<p><a href="{{ lead_url }}">Open the lead</a></p>

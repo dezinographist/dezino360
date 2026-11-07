@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "autoname": "format:EVT-{#####}",
+ "creation": "2026-11-06 12:00:00.000000",
+ "description": "Each Stripe event received by the webhook, once (phase 8). No card details or message bodies are kept.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "event_id",
+  "event_type",
+  "status",
+  "received_at",
+  "livemode",
+  "column_break_1",
+  "stripe_subscription",
+  "checkout_session",
+  "subscription",
+  "note"
+ ],
+ "fields": [
+  {
+   "fieldname": "event_id",
+   "fieldtype": "Data",
+   "label": "Stripe event ID",
+   "unique": 1,
+   "in_list_view": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "event_type",
+   "fieldtype": "Data",
+   "label": "Type",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "What the Hub did",
+   "options": "Received\nApplied\nIgnored\nRefused\nError",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "received_at",
+   "fieldtype": "Datetime",
+   "label": "Received (UTC)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "livemode",
+   "fieldtype": "Check",
+   "label": "Live mode (always refused)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stripe_subscription",
+   "fieldtype": "Data",
+   "label": "Stripe subscription ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "checkout_session",
+   "fieldtype": "Data",
+   "label": "Stripe checkout session ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "subscription",
+   "fieldtype": "Link",
+   "label": "Subscription",
+   "options": "Dezino360 Subscription",
+   "read_only": 1
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "Note",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-11-06 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Dezino360",
+ "name": "Dezino360 Stripe Event",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 0,
+   "delete": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "write": 1,
+   "export": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

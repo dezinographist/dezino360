@@ -1,0 +1,14 @@
+{#- DRAFT (1 Nov 2026), for reviewer approval. Sent to the visitor after booking a call. Every name
+    and address comes from the workspace's Dezino360 Settings. -#}
+<div style="max-width:600px;padding:16px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#222222;">
+<p style="margin:0 0 14px;">Hi {{ first_name }},</p>
+<p style="margin:0 0 14px;">Your {{ title }} is booked for <strong>{{ when }}</strong> ({{ time_zone }} time).</p>
+{% if meeting_link %}
+<p style="margin:0 0 14px;"><a href="{{ meeting_link }}" style="color:#7a004b;">Join the video call</a></p>
+{% else %}
+<p style="margin:0 0 14px;">We'll send you the video call link before the call.</p>
+{% endif %}
+<p style="margin:0 0 14px;">Need a different time? Reply to this email.</p>
+<p style="margin:0 0 24px;">Kind regards,<br>{{ business_name }}</p>
+{% if postal_address %}<p style="margin:0;font-size:12px;color:#777777;">{{ business_name }}, {{ postal_address }}.</p>{% endif %}
+</div>

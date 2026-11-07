@@ -1,0 +1,103 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "field:workspace",
+ "creation": "2026-10-31 12:00:00.000000",
+ "description": "One client workspace: its own Frappe site and database at <workspace>.dezino360.com.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "workspace",
+  "client_name",
+  "status",
+  "column_break_1",
+  "site",
+  "role",
+  "oauth_client"
+ ],
+ "fields": [
+  {
+   "description": "Lower-case letters, numbers and dashes. Becomes <workspace>.dezino360.com.",
+   "fieldname": "workspace",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Workspace",
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "client_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Client Name",
+   "reqd": 1
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Active\nPaused",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Data",
+   "label": "Site Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "role",
+   "fieldtype": "Link",
+   "label": "Member Role",
+   "options": "Role",
+   "read_only": 1
+  },
+  {
+   "fieldname": "oauth_client",
+   "fieldtype": "Link",
+   "label": "Login Client",
+   "options": "OAuth Client",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "links": [],
+ "modified": "2026-10-31 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Dezino360",
+ "name": "Dezino Workspace",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 0,
+   "export": 1,
+   "print": 0,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 0,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Dezino Agency"
+  }
+ ],
+ "sort_field": "client_name",
+ "sort_order": "ASC",
+ "states": [],
+ "title_field": "client_name",
+ "track_changes": 1
+}

@@ -1,0 +1,148 @@
+{
+ "actions": [],
+ "autoname": "format:CALL-{#####}",
+ "creation": "2026-11-05 10:00:00.000000",
+ "description": "A phone call answered by the AI receptionist. Times are in UTC.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "started_at",
+  "duration_seconds",
+  "minutes",
+  "from_number",
+  "to_number",
+  "column_break_1",
+  "lead",
+  "booking",
+  "email_consent",
+  "call_id",
+  "section_text",
+  "summary",
+  "transcript",
+  "recording_file"
+ ],
+ "fields": [
+  {
+   "fieldname": "started_at",
+   "fieldtype": "Datetime",
+   "label": "Started (UTC)",
+   "in_list_view": 1,
+   "reqd": 1,
+   "search_index": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "duration_seconds",
+   "fieldtype": "Int",
+   "label": "Length (seconds)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "minutes",
+   "fieldtype": "Float",
+   "label": "Minutes counted",
+   "precision": "1",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "from_number",
+   "fieldtype": "Data",
+   "label": "Caller's number",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "to_number",
+   "fieldtype": "Data",
+   "label": "Number called",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lead",
+   "fieldtype": "Link",
+   "label": "Lead",
+   "options": "CRM Lead",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "booking",
+   "fieldtype": "Link",
+   "label": "Booking",
+   "options": "Dezino360 Booking",
+   "read_only": 1
+  },
+  {
+   "fieldname": "email_consent",
+   "fieldtype": "Select",
+   "label": "Email permission",
+   "options": "Not asked\nYes",
+   "default": "Not asked",
+   "description": "Yes only when the caller clearly said yes to the booking link and follow-up emails.",
+   "read_only": 1
+  },
+  {
+   "fieldname": "call_id",
+   "fieldtype": "Data",
+   "label": "Call ID",
+   "unique": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_text",
+   "fieldtype": "Section Break",
+   "label": "What was said"
+  },
+  {
+   "fieldname": "summary",
+   "fieldtype": "Small Text",
+   "label": "Summary",
+   "read_only": 1
+  },
+  {
+   "fieldname": "transcript",
+   "fieldtype": "Long Text",
+   "label": "Transcript",
+   "read_only": 1
+  },
+  {
+   "fieldname": "recording_file",
+   "fieldtype": "Data",
+   "label": "Recording file (on the Hub server, deleted after 90 days)",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-11-05 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Dezino360",
+ "name": "Dezino360 Call",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 0,
+   "delete": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "write": 1,
+   "export": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager"
+  }
+ ],
+ "sort_field": "started_at",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "from_number",
+ "track_changes": 1
+}

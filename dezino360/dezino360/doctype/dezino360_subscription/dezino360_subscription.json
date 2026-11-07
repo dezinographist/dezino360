@@ -1,0 +1,210 @@
+{
+ "actions": [],
+ "autoname": "format:SUB-{#####}",
+ "creation": "2026-11-06 12:00:00.000000",
+ "description": "A paying customer's Dezino360 plan, kept in step with Stripe (phase 8: Stripe sandbox, test only). Card details stay with Stripe.",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "business_name",
+  "contact_name",
+  "email",
+  "plan",
+  "term",
+  "column_break_1",
+  "status",
+  "setup_fee_paid",
+  "current_period_end",
+  "first_paid_at",
+  "overdue_since",
+  "cancelled_at",
+  "section_links",
+  "lead",
+  "client_reference",
+  "workspace",
+  "column_break_2",
+  "stripe_customer",
+  "stripe_subscription",
+  "stripe_link",
+  "stripe_checkout_session",
+  "test_mode"
+ ],
+ "fields": [
+  {
+   "fieldname": "business_name",
+   "fieldtype": "Data",
+   "label": "Business name",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "contact_name",
+   "fieldtype": "Data",
+   "label": "Contact name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "options": "Email",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "plan",
+   "fieldtype": "Select",
+   "label": "Plan",
+   "options": "\nStarter\nMaster\nBlaster",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "term",
+   "fieldtype": "Select",
+   "label": "Billing",
+   "options": "\nMonthly\nEvery 3 months\nAnnual",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Incomplete\nActive\nOverdue\nPaused\nCancelled",
+   "default": "Incomplete",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1,
+   "description": "From Stripe, test mode. Overdue: a payment failed. Paused: unpaid 14 days after the first failure (a status only; nothing is switched off). Cancelled: cancelled in Stripe (the Hub cancels at day 30)."
+  },
+  {
+   "fieldname": "setup_fee_paid",
+   "fieldtype": "Check",
+   "label": "Setup fee paid",
+   "read_only": 1
+  },
+  {
+   "fieldname": "current_period_end",
+   "fieldtype": "Datetime",
+   "label": "Next renewal (UTC)",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "first_paid_at",
+   "fieldtype": "Datetime",
+   "label": "First paid (UTC)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "overdue_since",
+   "fieldtype": "Datetime",
+   "label": "Overdue since (UTC)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cancelled_at",
+   "fieldtype": "Datetime",
+   "label": "Cancelled (UTC)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_links",
+   "fieldtype": "Section Break",
+   "label": "Links"
+  },
+  {
+   "fieldname": "lead",
+   "fieldtype": "Link",
+   "label": "CRM lead",
+   "options": "CRM Lead",
+   "read_only": 1
+  },
+  {
+   "fieldname": "client_reference",
+   "fieldtype": "Data",
+   "label": "Lead reference from the payment link",
+   "read_only": 1
+  },
+  {
+   "fieldname": "workspace",
+   "fieldtype": "Data",
+   "label": "Client workspace",
+   "description": "Filled in when the client's workspace is made (hub-new-client, a manual step in phase 8)."
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "stripe_customer",
+   "fieldtype": "Data",
+   "label": "Stripe customer ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "stripe_subscription",
+   "fieldtype": "Data",
+   "label": "Stripe subscription ID",
+   "unique": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "stripe_link",
+   "fieldtype": "Data",
+   "options": "URL",
+   "label": "View in Stripe",
+   "read_only": 1,
+   "description": "This subscription in Stripe's dashboard (test data)."
+  },
+  {
+   "fieldname": "stripe_checkout_session",
+   "fieldtype": "Data",
+   "label": "Stripe checkout session ID",
+   "read_only": 1
+  },
+  {
+   "fieldname": "test_mode",
+   "fieldtype": "Check",
+   "label": "Test (Stripe sandbox)",
+   "default": "1",
+   "read_only": 1
+  }
+ ],
+ "links": [],
+ "modified": "2026-11-06 14:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Dezino360",
+ "name": "Dezino360 Subscription",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 0,
+   "delete": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "write": 1,
+   "export": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Sales Manager"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "business_name",
+ "track_changes": 1,
+ "search_fields": "email,plan,status"
+}
